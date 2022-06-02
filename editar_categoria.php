@@ -1,3 +1,13 @@
+<?php
+$id = $_GET['id'];
+
+$conexao = new PDO('sqlite:dw.db');
+$query = "SELECT * FROM categoria where id = $id";
+$result = $conexao->query($query);
+$categoria = $result->fetch();
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -24,10 +34,10 @@
     <main role="main" class="container">
       <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Editar categoria</h4>
-          <form class="needs-validation" action="editar-categoria-update.php?id=<?php echo $id?>" method="post" novalidate>
+          <form class="needs-validation" action="editar_categoria_post.php?id=<?php echo $id;?>" method="post" novalidate>
             <div class="mb-3">
               <label for="endereco">Nome da categoria</label>
-              <input type="text" class="form-control" value="<?php echo $resultado['nome'];?>" id="nome" name="nome" placeholder="Nome da categoria" required autofocus>
+              <input type="text" class="form-control" value="<?php echo $categoria['nome'];?>" id="nome" name="nome" placeholder="Nome da categoria" required autofocus>
               <div class="invalid-feedback">
                 Por favor, insira o nome da categoria.
               </div>
